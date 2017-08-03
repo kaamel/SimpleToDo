@@ -1,4 +1,4 @@
-# Pre-work - *Name of App Here*
+# Pre-work - *Simple Todo App*
 
 **Simple Todo App** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
@@ -41,19 +41,21 @@ As part of your pre-work submission, please reflect on the app and answer the fo
 
 **Question 1:** "What are your reactions to the Android app development platform so far? Compare and contrast Android's approach to layouts and user interfaces in past platforms you've used."
 
-**Answer:** [Enter your answer here in a paragraph or two].
+**Answer:** In my opinion everything seemed natural and expected. The callbacks (onWhatever) make dealing with events fair simple and straightforward.
 
 **Question 2:** "Take a moment to reflect on the `ArrayAdapter` used in your pre-work. How would you describe an adapter in this context and what is its function in Android? Why do you think the adapter is important? Explain the purpose of the `convertView` in the `getView` method of the `ArrayAdapter`."
 
-**Answer:** [Enter your answer here in a paragraph or two].
+**Answer:** The ArrayAdapter provides the "wiring" between the data array (the list) and what is displayed on the sreen. Clearly it is a key element that separtes and connects the data and the view. The getView method returns a view for the given position in the list which will then be displayed by Android in the list view in that position. The converstView allows the sytem to reuse an existing view (if there is one) that is no longer needed (because the user has scrolled it far enough off the screen). This will allow effective use the Android resources.
 
 ## Notes
 
 Describe any challenges encountered while building the app.
 
+Displaying the keyboard upon getting focus was interesting and I ended up posting a delayed event to make it to work. 
+
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2017] [Kaamel Kermaani]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
