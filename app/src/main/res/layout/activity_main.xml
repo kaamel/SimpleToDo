@@ -20,22 +20,9 @@
         android:id="@+id/btnAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:onClick="onAddItem"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="Add Item" />
-
-    <EditText
-        android:id="@+id/etNewItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="Add Item"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btnAddItem"
-        android:layout_toStartOf="@+id/btnAddItem"
-        android:ems="10"
-        android:hint="Enter a New Item"
-        android:inputType="textPersonName" />
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

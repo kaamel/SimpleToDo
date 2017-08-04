@@ -7,9 +7,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class EditItemActivity extends AppCompatActivity {
+
+    private int id;
+    private EditText titleET;
+    private EditText dueDateET;
+    private RadioGroup priorityRG;
 
     private int position;
 
@@ -25,19 +33,42 @@ public class EditItemActivity extends AppCompatActivity {
             sab.setDisplayUseLogoEnabled(true);
         }
 
-        EditText editText = (EditText) findViewById(R.id.txtEditItem);
+        TextView headerTV = (TextView) findViewById(R.id.itemTitleDialog);
+        titleET = (EditText) findViewById(R.id.txtEditItem);
+        dueDateET = (EditText) findViewById(R.id.dueDate);
+        priorityRG = (RadioGroup) findViewById(R.id.radio_group_proity);
 
-        String item = getIntent().getStringExtra("item");
-        position = getIntent().getIntExtra("pos", -1);
-        if (position < 0) {
-            setResult(RESULT_CANCELED, null);
-            finish();
+        Button button = (Button) findViewById(R.id.btnSave);
+
+        String title = getIntent().getStringExtra(MainActivity.ITEM_TITLE);
+        String date = getIntent().getStringExtra(MainActivity.ITEM_DUE_DATE);
+        id = getIntent().getIntExtra(MainActivity.ITEM_ID, -1);
+        int priority = getIntent().getIntExtra(MainActivity.ITEM_PRIORITY, 1);
+
+        position = getIntent().getIntExtra(MainActivity.ITEM_POSITION, -1);
+
+        if (title == null) {
+            title = "";
+            headerTV.setText("Enter New Item");
+            button.setText("Create");
         }
-        if (item == null)
-            item = "";
-
-        editText.setText(item);
-        editText.setSelection(item.length());
+        else {
+            headerTV.setText("Edit Item");
+            button.setText("Save");
+            titleET.setText(title);
+            titleET.setSelection(title.length());
+            dueDateET.setText(date);
+            switch (priority) {
+                case 0:
+                    priorityRG.check(R.id.proity_low);
+                    break;
+                case 2:
+                    priorityRG.check(R.id.proity_high);
+                    break;
+                default:
+                    priorityRG.check(R.id.proity_medium);
+            }
+        }
     }
 
     @Override
@@ -59,9 +90,21 @@ public class EditItemActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.txtEditItem);
         Intent data = new Intent();
         // Pass relevant data back as a result
-        data.putExtra("editedItem", editText.getText().toString());
-        data.putExtra("position", position);
-        setResult(RESULT_OK, data); // set result code and bundle data for response
+        data.putExtra(MainActivity.ITEM_TITLE, editText.getText().toString());
+        data.putExtra(MainActivity.ITEM_DUE_DATE, dueDateET.getText().toString());
+        switch(priorityRG.getCheckedRadioButtonId()) {
+            case R.id.proity_low:
+                data.putExtra(MainActivity.ITEM_PRIORITY, 0);
+                break;
+            case R.id.proity_high:
+                data.putExtra(MainActivity.ITEM_PRIORITY, 2);
+                break;
+            default:
+                data.putExtra(MainActivity.ITEM_PRIORITY, 1);
+        }
+        data.putExtra(MainActivity.ITEM_ID, id);
+        data.putExtra(MainActivity.ITEM_POSITION, position);
+        setResult(RESULT_OK, data);
         finish();
     }
 }
