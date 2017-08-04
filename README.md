@@ -35,7 +35,7 @@ Here's a walkthrough of implemented user stories:
 
 Here is the second version after implementing storing in SQL, adding priority and due date, and add a custom adpater.
 
-<img src='http://i.imgur.com/GXQsf2A.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/v9Q4gW8.gif' title='Video Walkthrough' width='' alt='Second Video Walkthrough' />
 
 
 
