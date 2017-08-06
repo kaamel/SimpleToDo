@@ -1,6 +1,7 @@
 package com.codepath.simpletodo;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,33 +16,35 @@ import java.util.List;
 
 public class ItemsAdapter extends ArrayAdapter<Item> {
 
-    int listLayout;
+    private int listLayout;
 
     public ItemsAdapter(Context context, int resource, List<Item> items) {
         super(context, resource, items);
         listLayout = resource;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         Item item = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(listLayout, parent, false);
         }
         // Lookup view for data population
-        TextView title = (TextView) convertView.findViewById(R.id.item_title);
-        TextView dueDate = (TextView) convertView.findViewById(R.id.item_due_date);
-        TextView priority = (TextView) convertView.findViewById(R.id.item_priority);
+        TextView title = convertView.findViewById(R.id.item_title);
+        TextView dueDate = convertView.findViewById(R.id.item_due_date);
+        TextView priority = convertView.findViewById(R.id.item_priority);
+
         title.setText(item.title);
         switch (item.priority) {
             case 0:
-                priority.setText("Priority: Low");
+                priority.setText(R.string.low_priority);
                 break;
             case 2:
-                priority.setText("Priority: High");
+                priority.setText(R.string.high_priority);
                 break;
             default:
-                priority.setText("Priority: Medium");
+                priority.setText(R.string.medium_priority);
                 break;
 
         }

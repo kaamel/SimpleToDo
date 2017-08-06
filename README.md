@@ -4,7 +4,7 @@
 
 Submitted by: **Kaamel Kermaani**
 
-Time spent: **8 (4: v1, 4: v2)** hours spent in total ()
+Time spent: **10 (4: v1, 4: v2, 2: v3)** hours spent in total ()
 
 ## User Stories
 
@@ -19,24 +19,31 @@ The following **optional** features are implemented:
 * [x] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
 * [x] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
 * [x] Add support for completion due dates for todo items (and display within listview item)
-* [ ] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
+* [x] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
 * [x] Add support for selecting the priority of each todo item (and display in listview item)
-* [ ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
+* [x] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] List anything else that you can get done to improve the app functionality!
+
+* Replaced the the add new item button with a floating action bar.
+* Added localized date format validation
+* Enhanced the view of the items in the list
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/fLaY6CF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/fLaY6CF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v1' />
 
 Here is the second version after implementing storing in SQL, adding priority and due date, and add a custom adpater.
 
-<img src='http://i.imgur.com/GXQsf2A.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/GXQsf2A.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v2' />
 
+And the third version
+
+<img src='http://i.imgur.com/gjhQHAq.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
