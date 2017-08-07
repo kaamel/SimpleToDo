@@ -10,4 +10,6 @@
     <string name="low_priority">Priority: Low</string>
     <string name="medium_priority">Priority: Medium</string>
     <string name="high_priority">Priority: High</string>
+    <string name="action_settings">Action Settings</string>
+    <string name="menu_search">Menu Search</string>
 </resources>

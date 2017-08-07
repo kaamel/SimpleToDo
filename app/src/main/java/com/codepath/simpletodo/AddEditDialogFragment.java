@@ -58,7 +58,7 @@ public class AddEditDialogFragment extends DialogFragment {
 
         String title = item.title;
         String date = item.dueDate;
-        int id = item.id;
+        int id = item._id;
         int priority = item.priority;
 
         if (title == null) {
@@ -107,16 +107,13 @@ public class AddEditDialogFragment extends DialogFragment {
                         item.priority = 1;
                 }
                 if (getTag().equals("new")) {
-                    ((MainActivity) getActivity()).items.add(item);
                     Toast.makeText(getActivity(), "new item added ...", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    int pos = Integer.valueOf(getTag());
-                    ((MainActivity) getActivity()).items.set(pos, item);
                     Toast.makeText(getActivity(), "item updated ...", Toast.LENGTH_SHORT).show();
                 }
                 item.save();
-                ((MainActivity) getActivity()).itemsAdapter.notifyDataSetChanged();
+                ((MainActivity) getActivity()).todoAdapter.changeCursor(Item.getCursor()); //.notifyDataSetChanged();
 
                 dismiss();
             }

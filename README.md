@@ -4,7 +4,7 @@
 
 Submitted by: **Kaamel Kermaani**
 
-Time spent: **10 (4: v1, 4: v2, 2: v3)** hours spent in total ()
+Time spent: **11 (4: v1, 4: v2, 2: v3, 1: v4)** hours spent in total ()
 
 ## User Stories
 
@@ -30,6 +30,9 @@ The following **additional** features are implemented:
 * Replaced the the add new item button with a floating action bar.
 * Added localized date format validation
 * Enhanced the view of the items in the list
+* CursorAdapter
+*  Search Title
+*  Some refactoring
 
 ## Video Walkthrough
 
@@ -44,6 +47,10 @@ Here is the second version after implementing storing in SQL, adding priority an
 And the third version
 
 <img src='http://i.imgur.com/gjhQHAq.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
+
+After adding title search
+
+<img src='http://i.imgur.com/WekXQgG.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).

@@ -7,6 +7,7 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 
 import java.util.List;
 
@@ -18,14 +19,14 @@ import java.util.List;
 public class Item extends BaseModel {
 
     public static final String ITEM_TITLE = "title";
-    public static final String ITEM_DUE_DATE = "due_date";
+    public static final String ITEM_DUE_DATE = "dueDate";
     public static final String ITEM_PRIORITY = "priority";
     public static final String ITEM_STATUS = "status";
-    public static final String ITEM_ID = "id";
+    public static final String ITEM_ID = "_id";
 
     @Column
     @PrimaryKey(autoincrement = true)
-    int id;
+    int _id;
 
     @Column
     public String title;
@@ -47,7 +48,7 @@ public class Item extends BaseModel {
     public static Item findItemById(int id) {
         return SQLite.select().
                 from(Item.class).
-                where(Item_Table.id.is(id)).
+                where(Item_Table._id.is(id)).
                 querySingle();
     }
 
@@ -64,7 +65,7 @@ public class Item extends BaseModel {
             bundle.putString(ITEM_TITLE, item.title);
             bundle.putString(ITEM_DUE_DATE, item.dueDate);
             bundle.putInt(ITEM_PRIORITY, item.priority);
-            bundle.putInt(ITEM_ID, item.id);
+            bundle.putInt(ITEM_ID, item._id);
             bundle.putBoolean(ITEM_STATUS, item.status);
         }
         return bundle;
@@ -77,8 +78,18 @@ public class Item extends BaseModel {
             item.title = bundle.getString(ITEM_TITLE);
             item.priority = bundle.getInt(ITEM_PRIORITY);
             item.status = bundle.getBoolean(ITEM_STATUS);
-            item.id = bundle.getInt(ITEM_ID);
+            item._id = bundle.getInt(ITEM_ID);
         }
         return item;
+    }
+
+    public static FlowCursor getCursor() {
+        return SQLite.select().from(Item.class).query();
+    }
+
+    public static FlowCursor getCursor(String filter) {
+        return SQLite.select().
+                from(Item.class).
+                where(Item_Table.title.like("%" + filter + "%")).query();
     }
 }
