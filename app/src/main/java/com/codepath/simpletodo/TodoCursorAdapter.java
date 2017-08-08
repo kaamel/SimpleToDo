@@ -2,10 +2,12 @@ package com.codepath.simpletodo;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.FilterQueryProvider;
 import android.widget.TextView;
 
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
@@ -47,7 +49,18 @@ public class TodoCursorAdapter extends CursorAdapter {
                 break;
 
         }
-        dueDate.setText("Due " + cursor.getString(cursor.getColumnIndexOrThrow(Item.ITEM_DUE_DATE)));
+        long date = cursor.getLong(cursor.getColumnIndexOrThrow(Item.ITEM_DUE_DATE));
+
+        dueDate.setText("Due " + Utils.longToDateString(date));
+        if (date == Utils.getTodayLong()) {
+            dueDate.setTextColor(Color.BLUE);
+        }
+        else if (date < Utils.getTodayLong()) {
+            dueDate.setTextColor(Color.RED);
+        }
+        else {
+            dueDate.setTextColor(Color.BLACK);
+        }
     }
 
     public int getItemIdByPosition(int pos) {
@@ -58,13 +71,23 @@ public class TodoCursorAdapter extends CursorAdapter {
         return Item.findItemById(getItemIdByPosition(pos));
     }
 
-    void filter(String text) {
-        if (text == null || text.trim().equals("")) {
-            titleFilter = "";
-            changeCursor(Item.getCursor());
-            return;
+    @Override
+    public FilterQueryProvider getFilterQueryProvider() {
+        return new TodoFilterQueryProvider();
+    }
+
+    public class TodoFilterQueryProvider implements FilterQueryProvider {
+
+        @Override
+        public Cursor runQuery(CharSequence charSequence) {
+            if (charSequence == null || charSequence.toString().trim().equals("")) {
+                titleFilter = "";
+                changeCursor(Item.getCursor());
+                return Item.getCursor();
+            }
+            titleFilter = charSequence.toString();
+            changeCursor(Item.getCursor(charSequence.toString()));
+            return Item.getCursor(charSequence.toString());
         }
-        titleFilter = text;
-        changeCursor(Item.getCursor(text));
     }
 }

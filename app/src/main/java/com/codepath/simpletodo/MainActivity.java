@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                todoAdapter.filter(newText);
+                todoAdapter.getFilterQueryProvider().runQuery(newText);
                 return true;
             }
         });

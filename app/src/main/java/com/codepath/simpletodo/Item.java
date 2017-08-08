@@ -1,5 +1,6 @@
 package com.codepath.simpletodo;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.raizlabs.android.dbflow.annotation.Column;
@@ -7,7 +8,6 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
-import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 
 import java.util.List;
 
@@ -38,11 +38,11 @@ public class Item extends BaseModel {
     public boolean status;
 
     @Column
-    public String dueDate;
+    public long dueDate;
 
     public static List<Item> readAllItems() {
         return SQLite.select().
-                from(Item.class).queryList();
+                from(Item.class).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).queryList();
     }
 
     public static Item findItemById(int id) {
@@ -55,7 +55,8 @@ public class Item extends BaseModel {
     public static List<Item> findCompletedItems(boolean completed) {
         return SQLite.select().
                 from(Item.class).
-                where(Item_Table.status.is(completed)).
+                where(Item_Table.status.is(completed)).orderBy(Item_Table.dueDate, true).
+                orderBy(Item_Table.priority, false).
                 queryList();
     }
 
@@ -63,7 +64,7 @@ public class Item extends BaseModel {
         Bundle bundle = new Bundle();
         if (item != null) {
             bundle.putString(ITEM_TITLE, item.title);
-            bundle.putString(ITEM_DUE_DATE, item.dueDate);
+            bundle.putLong(ITEM_DUE_DATE, item.dueDate);
             bundle.putInt(ITEM_PRIORITY, item.priority);
             bundle.putInt(ITEM_ID, item._id);
             bundle.putBoolean(ITEM_STATUS, item.status);
@@ -74,7 +75,7 @@ public class Item extends BaseModel {
     public static Item getItem(Bundle bundle) {
         Item item = new Item();
         if (bundle != null) {
-            item.dueDate = bundle.getString(ITEM_DUE_DATE);
+            item.dueDate = bundle.getLong(ITEM_DUE_DATE);
             item.title = bundle.getString(ITEM_TITLE);
             item.priority = bundle.getInt(ITEM_PRIORITY);
             item.status = bundle.getBoolean(ITEM_STATUS);
@@ -83,13 +84,13 @@ public class Item extends BaseModel {
         return item;
     }
 
-    public static FlowCursor getCursor() {
-        return SQLite.select().from(Item.class).query();
+    public static Cursor getCursor() {
+        return SQLite.select().from(Item.class).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).query();
     }
 
-    public static FlowCursor getCursor(String filter) {
+    public static Cursor getCursor(String filter) {
         return SQLite.select().
                 from(Item.class).
-                where(Item_Table.title.like("%" + filter + "%")).query();
+                where(Item_Table.title.like("%" + filter + "%")).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).query();
     }
 }

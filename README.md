@@ -4,7 +4,7 @@
 
 Submitted by: **Kaamel Kermaani**
 
-Time spent: **11 (4: v1, 4: v2, 2: v3, 1: v4)** hours spent in total ()
+Time spent: **12 (4: v1, 4: v2, 2: v3, 1: v4 1: v5)** hours spent in total ()
 
 ## User Stories
 
@@ -31,8 +31,12 @@ The following **additional** features are implemented:
 * Added localized date format validation
 * Enhanced the view of the items in the list
 * CursorAdapter
-*  Search Title
-*  Some refactoring
+* Search Title
+* Sorted by due date first then priority
+* Past due item dates are shown in read
+* Dates of items due today are shown in blue
+* Items added/edited without due date are recorded to be due today
+* More refactoring
 
 ## Video Walkthrough
 
@@ -52,6 +56,9 @@ After adding title search
 
 <img src='http://i.imgur.com/WekXQgG.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
 
+After adding default date, sorting by date/priority, coloring text based on status
+
+<img src='http://i.imgur.com/vCtHds3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

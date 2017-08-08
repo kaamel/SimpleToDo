@@ -12,10 +12,6 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Locale;
-
 
 public class AddEditDialogFragment extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -57,7 +53,7 @@ public class AddEditDialogFragment extends DialogFragment {
         Button cancelButton = v.findViewById(R.id.btnCancel);
 
         String title = item.title;
-        String date = item.dueDate;
+        long date = item.dueDate;
         int id = item._id;
         int priority = item.priority;
 
@@ -70,7 +66,7 @@ public class AddEditDialogFragment extends DialogFragment {
             actionButton.setText(R.string.save);
             titleET.setText(title);
             titleET.setSelection(title.length());
-            dueDateET.setText(date);
+            dueDateET.setText(Utils.longToDateString(date));
             switch (priority) {
                 case 0:
                     priorityRG.check(R.id.proity_low);
@@ -91,10 +87,15 @@ public class AddEditDialogFragment extends DialogFragment {
                     Toast.makeText(getActivity(), R.string.missing_title, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                item.dueDate = dueDateET.getText().toString();
-                if (!validDate(item.dueDate)) {
+                if (dueDateET.getText().toString().trim().equals("")) {
+                    item.dueDate = Utils.todayToLong();
+                }
+                else if (!Utils.validDate(dueDateET.getText().toString())) {
                     Toast.makeText(getActivity(), R.string.missing_date, Toast.LENGTH_SHORT).show();
                     return;
+                }
+                else {
+                    item.dueDate = Utils.dateToLong(dueDateET.getText().toString());
                 }
                 switch(priorityRG.getCheckedRadioButtonId()) {
                     case R.id.proity_low:
@@ -113,7 +114,7 @@ public class AddEditDialogFragment extends DialogFragment {
                     Toast.makeText(getActivity(), "item updated ...", Toast.LENGTH_SHORT).show();
                 }
                 item.save();
-                ((MainActivity) getActivity()).todoAdapter.changeCursor(Item.getCursor()); //.notifyDataSetChanged();
+                ((MainActivity) getActivity()).todoAdapter.changeCursor(Item.getCursor());
 
                 dismiss();
             }
@@ -130,19 +131,6 @@ public class AddEditDialogFragment extends DialogFragment {
         return v;
     }
 
-    private boolean validDate(String dueDate) {
-        DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
-        if (dueDate == null || dueDate.trim().equals(""))
-            return false;
-        formatter.setLenient(false);
-        try {
-            formatter.parse(dueDate);
-        } catch (ParseException e) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -154,6 +142,6 @@ public class AddEditDialogFragment extends DialogFragment {
                 InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
             }
-        }, 300);
+        }, 500);
     }
 }
