@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/itemTitleDialog"
+        android:textCursorDrawable="@null"
         android:layout_marginTop="5dp"
-        android:hint="Item title"
+        android:hint="@string/item_title"
         android:inputType="textMultiLine" />
 
 
@@ -25,22 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:hint="Due date"
+        android:hint="@string/due_date"
+        android:textCursorDrawable="@null"
         android:inputType="date"
         android:layout_below="@+id/txtEditItem"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/itemTitleDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="Dialog Title:"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -55,7 +43,10 @@
         android:layout_below="@+id/dueDate"
         android:layout_marginTop="5dp"
         android:paddingLeft="5dp"
-        android:text="Priority" />
+        android:paddingStart="5dp"
+        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
+        android:text="@string/priority" />
 
     <RadioGroup
         android:id="@+id/radio_group_proity"
@@ -63,7 +54,6 @@
         android:layout_height="wrap_content"
         android:checkedButton="@+id/proity_medium"
         android:orientation="horizontal"
-        android:text="Priority"
         android:weightSum="3"
         android:layout_below="@+id/radioGroupTitle"
         android:layout_marginTop="5dp"
@@ -76,21 +66,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="High" />
+            android:text="@string/high" />
 
         <RadioButton
             android:id="@+id/proity_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Medium" />
+            android:text="@string/medium" />
 
         <RadioButton
             android:id="@+id/proity_low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Low" />
+            android:text="@string/low" />
     </RadioGroup>
 
 
@@ -98,22 +88,19 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onSaveItem"
-        android:text="Create"
+        android:text="@string/create"
         android:layout_below="@+id/radio_group_proity"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="68dp"
-        android:layout_marginEnd="68dp" />
+        android:layout_marginRight="53dp"
+        android:layout_marginEnd="53dp" />
 
     <Button
         android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:layout_below="@+id/radio_group_proity"
-        android:layout_toRightOf="@+id/itemTitleDialog"
-        android:layout_toEndOf="@+id/itemTitleDialog"
         android:layout_marginLeft="53dp"
         android:layout_marginStart="53dp" />
 

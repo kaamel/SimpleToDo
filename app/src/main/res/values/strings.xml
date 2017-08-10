@@ -12,4 +12,18 @@
     <string name="high_priority">Priority: High</string>
     <string name="action_settings">Action Settings</string>
     <string name="menu_search">Menu Search</string>
+    <string name="item_title">Item Title</string>
+    <string name="due_date">Due Date</string>
+    <string name="priority">Priority</string>
+    <string name="high">High</string>
+    <string name="medium">Medium</string>
+    <string name="low">Low</string>
+    <string name="cancel">Cancel</string>
+    <string name="due_today">Due today</string>
+    <string name="past_due">Past due since yesterday</string>
+    <string name="past_due_since">Past due since </string>
+    <string name="due_tomorrow">Due Tomorrow</string>
+    <string name="due">Due</string>
+    <string name="hide_completed">Hide Completed Items</string>
+    <string name="show_completed">Include Completed Items</string>
 </resources>

@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/tools">
 
     <item
+        android:id="@+id/menu_hide_completed"
+        android:title="@string/hide_completed"
+        appcompat:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_show_completed"
+        android:title="@string/show_completed"
+        appcompat:showAsAction="never"/>
+
+    <item
         android:id="@+id/menu_search"
         android:title="@string/menu_search"
         appcompat:actionViewClass="android.support.v7.widget.SearchView"

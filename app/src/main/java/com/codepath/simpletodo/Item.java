@@ -21,7 +21,7 @@ public class Item extends BaseModel {
     public static final String ITEM_TITLE = "title";
     public static final String ITEM_DUE_DATE = "dueDate";
     public static final String ITEM_PRIORITY = "priority";
-    public static final String ITEM_STATUS = "status";
+    public static final String ITEM_ACTION_COMPLETED = "completed";
     public static final String ITEM_ID = "_id";
 
     @Column
@@ -35,7 +35,7 @@ public class Item extends BaseModel {
     public int priority;
 
     @Column
-    public boolean status;
+    public boolean completed;
 
     @Column
     public long dueDate;
@@ -52,14 +52,6 @@ public class Item extends BaseModel {
                 querySingle();
     }
 
-    public static List<Item> findCompletedItems(boolean completed) {
-        return SQLite.select().
-                from(Item.class).
-                where(Item_Table.status.is(completed)).orderBy(Item_Table.dueDate, true).
-                orderBy(Item_Table.priority, false).
-                queryList();
-    }
-
     public static Bundle getBundle(Item item) {
         Bundle bundle = new Bundle();
         if (item != null) {
@@ -67,7 +59,7 @@ public class Item extends BaseModel {
             bundle.putLong(ITEM_DUE_DATE, item.dueDate);
             bundle.putInt(ITEM_PRIORITY, item.priority);
             bundle.putInt(ITEM_ID, item._id);
-            bundle.putBoolean(ITEM_STATUS, item.status);
+            bundle.putBoolean(ITEM_ACTION_COMPLETED, item.completed);
         }
         return bundle;
     }
@@ -78,19 +70,24 @@ public class Item extends BaseModel {
             item.dueDate = bundle.getLong(ITEM_DUE_DATE);
             item.title = bundle.getString(ITEM_TITLE);
             item.priority = bundle.getInt(ITEM_PRIORITY);
-            item.status = bundle.getBoolean(ITEM_STATUS);
+            item.completed = bundle.getBoolean(ITEM_ACTION_COMPLETED);
             item._id = bundle.getInt(ITEM_ID);
         }
         return item;
     }
 
-    public static Cursor getCursor() {
-        return SQLite.select().from(Item.class).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).query();
-    }
-
-    public static Cursor getCursor(String filter) {
-        return SQLite.select().
+    public static Cursor getCursor(String filter, boolean includeCompleted) {
+        return includeCompleted?SQLite.select().
                 from(Item.class).
-                where(Item_Table.title.like("%" + filter + "%")).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).query();
+                where(Item_Table.title.like("%" + filter + "%")).
+                orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).
+                query()
+                :
+                SQLite.select().
+                        from(Item.class).
+                        where(Item_Table.title.like("%" + filter + "%")).
+                        and(Item_Table.completed.is(false)).
+                        orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).
+                        query();
     }
 }

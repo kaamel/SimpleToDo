@@ -4,7 +4,7 @@
 
 Submitted by: **Kaamel Kermaani**
 
-Time spent: **12 (4: v1, 4: v2, 2: v3, 1: v4 1: v5)** hours spent in total ()
+Time spent: **14** hours spent in total ()
 
 ## User Stories
 
@@ -29,36 +29,25 @@ The following **additional** features are implemented:
 
 * Replaced the the add new item button with a floating action bar.
 * Added localized date format validation
+* Items added/edited without due date are recorded to be due today
+* Date picker off the localized calendar
 * Enhanced the view of the items in the list
 * CursorAdapter
 * Search Title
-* Sorted by due date first then priority
+* Items are sorted by due date first then priority
 * Past due item dates are shown in read
 * Dates of items due today are shown in blue
-* Items added/edited without due date are recorded to be due today
-* More refactoring
+* Due dates are noted as "yesterday", "today", and "tomorrow" if applicable
+* Date for past due items displayed as "Past due since", followed by date
+* Display/hide completed items via menu option
+* When shown, completed items are in gray with strikeout title
+* When long click on a completed item, it is marked as incomplate again 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/fLaY6CF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v1' />
-
-Here is the second version after implementing storing in SQL, adding priority and due date, and add a custom adpater.
-
-<img src='http://i.imgur.com/GXQsf2A.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v2' />
-
-And the third version
-
-<img src='http://i.imgur.com/gjhQHAq.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
-
-After adding title search
-
-<img src='http://i.imgur.com/WekXQgG.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
-
-After adding default date, sorting by date/priority, coloring text based on status
-
-<img src='http://i.imgur.com/vCtHds3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v3' />
+<img src='http://i.imgur.com/CZm9xRv.gif' title='Video Walkthrough' width='' alt='Video Walkthrough v1' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

@@ -11,6 +11,8 @@ import java.util.Locale;
 
 public final class Utils {
 
+    private static final long DAY_IN_MILLI = 24 * 60 * 60 * 1000;
+
     public static DateFormat getDateFormat() {
         return DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
     }
@@ -59,5 +61,13 @@ public final class Utils {
         } catch (ParseException ignored) {
         }
         return time;
+    }
+
+    public static long getYesterdayLong() {
+        return getTodayLong() - DAY_IN_MILLI;
+    }
+
+    public static long getTomorrowLong() {
+        return getTodayLong() + DAY_IN_MILLI;
     }
 }

@@ -1,5 +1,6 @@
 package com.codepath.simpletodo;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -8,16 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.Calendar;
 
-public class AddEditDialogFragment extends DialogFragment {
+
+public class AddEditDialogFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     // TODO: Rename parameter arguments, choose names that match
     private static final String ITEM = "item";
 
     private Item item;
+    private EditText dueDateET;
 
     public AddEditDialogFragment() {
         // Required empty public constructor
@@ -46,7 +51,7 @@ public class AddEditDialogFragment extends DialogFragment {
         View v = inflater.inflate(R.layout.dialog_add_edit_item, container, false);
 
         final EditText titleET = v.findViewById(R.id.txtEditItem);
-        final EditText dueDateET = v.findViewById(R.id.dueDate);
+        dueDateET = v.findViewById(R.id.dueDate);
         final RadioGroup priorityRG = (RadioGroup) v.findViewById(R.id.radio_group_proity);
 
         Button actionButton = v.findViewById(R.id.btnSave);
@@ -114,7 +119,7 @@ public class AddEditDialogFragment extends DialogFragment {
                     Toast.makeText(getActivity(), "item updated ...", Toast.LENGTH_SHORT).show();
                 }
                 item.save();
-                ((MainActivity) getActivity()).todoAdapter.changeCursor(Item.getCursor());
+                ((MainActivity) getActivity()).todoAdapter.refresh();
 
                 dismiss();
             }
@@ -125,6 +130,24 @@ public class AddEditDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "cancelled ...", Toast.LENGTH_SHORT).show();
                 dismiss();
+            }
+        });
+
+        final Calendar c = Calendar.getInstance();
+        int startYear = c.get(Calendar.YEAR);
+        int starthMonth = c.get(Calendar.MONTH);
+        int startDay = c.get(Calendar.DAY_OF_MONTH);
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(), this, startYear, starthMonth, startDay);
+        datePickerDialog.getDatePicker().setCalendarViewShown(true);
+        datePickerDialog.getDatePicker().setSpinnersShown(false);
+
+        dueDateET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    datePickerDialog.show();
+                }
             }
         });
 
@@ -143,5 +166,14 @@ public class AddEditDialogFragment extends DialogFragment {
                 inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
             }
         }, 500);
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        dueDateET.setText(Utils.longToDateString(calendar.getTime().getTime()));
     }
 }
