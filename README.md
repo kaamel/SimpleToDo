@@ -4,7 +4,7 @@
 
 Submitted by: **Kaamel Kermaani**
 
-Time spent: **14** hours spent in total ()
+Time spent: **15** hours spent in total ()
 
 ## User Stories
 
@@ -28,26 +28,34 @@ The following **additional** features are implemented:
 * [x] List anything else that you can get done to improve the app functionality!
 
 * Replaced the the add new item button with a floating action bar.
-* Added localized date format validation
-* Items added/edited without due date are recorded to be due today
-* Date picker off the localized calendar
-* Enhanced the view of the items in the list
+* Added localized date format and validation
+* The default due date is set as today
+* Date picker from calendar
+* Enhanced view of the items in the list
 * CursorAdapter
-* Search Title
-* Items are sorted by due date first then priority
+* Title search with instant search
+* Display order of itmes by default are due date first then priority, then title
+* The first order can be set to due date, priority, or title via menu option
+* The current sort order is highlighted in the menu option
 * Past due item dates are shown in read
 * Dates of items due today are shown in blue
-* Due dates are noted as "yesterday", "today", and "tomorrow" if applicable
+* Due dates are noted as "yesterday", "today", or "tomorrow" if applicable
 * Date for past due items displayed as "Past due since", followed by date
+* Long pressing an item turns its status to complate 
+* Long pressing a completed item offers the user the option to delete it or mark it as incomplete 
 * Display/hide completed items via menu option
 * When shown, completed items are in gray with strikeout title
-* When long click on a completed item, it is marked as incomplate again 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/DH3hnk3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+The following video only shows the incremental features: sort menu option, option to delete
+the completed items via long press
+
+<img src='http://i.imgur.com/LPRdZqh.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

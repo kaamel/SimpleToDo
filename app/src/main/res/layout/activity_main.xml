@@ -26,7 +26,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:onClick="onAddItem"
-        android:src="@android:drawable/ic_input_add"
+        android:src="@drawable/ic_action_add"
         app:layout_anchor="@id/lvItem" />
 
 </RelativeLayout>

@@ -21,9 +21,23 @@ public class TodoCursorAdapter extends CursorAdapter {
 
     private static String titleFilter = "";
     private static boolean includeCompleted;
+    private static SortOrder sortOrder;
+
+    public SortOrder getSortOrder() {
+        return sortOrder;
+    }
+
+    enum SortOrder {
+        dueDate,
+        proirity,
+        title
+    }
 
     public TodoCursorAdapter(Context context) {
-        super(context, Item.getCursor(titleFilter, includeCompleted), 0);
+        super(context, Item.getCursor(titleFilter, includeCompleted, sortOrder==null?SortOrder.dueDate:sortOrder), 0);
+        if (sortOrder == null) {
+            sortOrder = SortOrder.dueDate;
+        }
     }
 
     @Override
@@ -112,6 +126,10 @@ public class TodoCursorAdapter extends CursorAdapter {
         return new TodoFilterQueryProvider();
     }
 
+    public void setSortOrder(SortOrder so) {
+        sortOrder = so;
+    }
+
     private class TodoFilterQueryProvider implements FilterQueryProvider {
 
         @Override
@@ -123,11 +141,11 @@ public class TodoCursorAdapter extends CursorAdapter {
                 titleFilter = charSequence.toString();
             }
             refresh();
-            return Item.getCursor(titleFilter, includeCompleted);
+            return Item.getCursor(titleFilter, includeCompleted, sortOrder);
         }
     }
 
     public void refresh() {
-        changeCursor(Item.getCursor(titleFilter, includeCompleted));
+        changeCursor(Item.getCursor(titleFilter, includeCompleted, sortOrder));
     }
 }

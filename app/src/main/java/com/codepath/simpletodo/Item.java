@@ -7,9 +7,8 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.sql.language.Where;
 import com.raizlabs.android.dbflow.structure.BaseModel;
-
-import java.util.List;
 
 /**
  * Created by kaamel on 8/3/17.
@@ -39,11 +38,6 @@ public class Item extends BaseModel {
 
     @Column
     public long dueDate;
-
-    public static List<Item> readAllItems() {
-        return SQLite.select().
-                from(Item.class).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).queryList();
-    }
 
     public static Item findItemById(int id) {
         return SQLite.select().
@@ -76,18 +70,30 @@ public class Item extends BaseModel {
         return item;
     }
 
-    public static Cursor getCursor(String filter, boolean includeCompleted) {
-        return includeCompleted?SQLite.select().
-                from(Item.class).
-                where(Item_Table.title.like("%" + filter + "%")).
-                orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).
-                query()
-                :
-                SQLite.select().
-                        from(Item.class).
-                        where(Item_Table.title.like("%" + filter + "%")).
-                        and(Item_Table.completed.is(false)).
-                        orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).
-                        query();
+    public static Cursor getCursor(String filter, boolean includeCompleted, TodoCursorAdapter.SortOrder sortOrder) {
+        Where<Item> w;
+        if (includeCompleted) {
+            w = SQLite.select().from(Item.class).
+                    where(Item_Table.title.like("%" + filter + "%"));
+        }
+        else {
+            w = SQLite.select().from(Item.class).
+                    where(Item_Table.title.like("%" + filter + "%")).and(Item_Table.completed.is(false));
+        }
+
+        switch (sortOrder) {
+            case proirity:
+                w = w.orderBy(Item_Table.priority, false).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.title, true);
+                break;
+
+            case title:
+                w = w.orderBy(Item_Table.title, true).orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false);
+                break;
+            default:
+                w = w.orderBy(Item_Table.dueDate, true).orderBy(Item_Table.priority, false).orderBy(Item_Table.title, true);
+                break;
+        }
+
+        return w.query();
     }
 }

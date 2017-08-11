@@ -2,6 +2,7 @@ package com.codepath.simpletodo;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -61,6 +62,21 @@ public final class Utils {
         } catch (ParseException ignored) {
         }
         return time;
+    }
+
+    public static int longToYear(long time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        return Integer.valueOf(sdf.format(new Date(time)));
+    }
+
+    public static int longToMonth(long time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        return Integer.valueOf(sdf.format(new Date(time)));
+    }
+
+    public static int longToDay(long time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("d");
+        return Integer.valueOf(sdf.format(new Date(time)));
     }
 
     public static long getYesterdayLong() {

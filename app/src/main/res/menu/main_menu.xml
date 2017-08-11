@@ -18,4 +18,11 @@
         appcompat:actionViewClass="android.support.v7.widget.SearchView"
         appcompat:showAsAction="always"/>
 
+
+    <item
+        android:id="@+id/sort"
+        android:title="@string/menu_sort"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        appcompat:showAsAction="ifRoom"/>
+
 </menu>

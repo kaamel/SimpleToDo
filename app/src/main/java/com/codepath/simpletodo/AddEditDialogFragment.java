@@ -62,9 +62,12 @@ public class AddEditDialogFragment extends DialogFragment implements DatePickerD
         int id = item._id;
         int priority = item.priority;
 
+        final Calendar c = Calendar.getInstance();
+
         if (title == null) {
             getDialog().setTitle("New Item");
             actionButton.setText(R.string.create);
+            dueDateET.setText(Utils.getTodayString());
         }
         else {
             getDialog().setTitle("Edit Item");
@@ -133,12 +136,12 @@ public class AddEditDialogFragment extends DialogFragment implements DatePickerD
             }
         });
 
-        final Calendar c = Calendar.getInstance();
-        int startYear = c.get(Calendar.YEAR);
-        int starthMonth = c.get(Calendar.MONTH);
-        int startDay = c.get(Calendar.DAY_OF_MONTH);
+        long time = Utils.dateToLong(dueDateET.getText().toString());
+        int startYear = Utils.longToYear(time);
+        int starthMonth = Utils.longToMonth(time);
+        int startDay = Utils.longToDay(time);
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getContext(), this, startYear, starthMonth, startDay);
+                getContext(), this, startYear, starthMonth-1, startDay);
         datePickerDialog.getDatePicker().setCalendarViewShown(true);
         datePickerDialog.getDatePicker().setSpinnersShown(false);
 

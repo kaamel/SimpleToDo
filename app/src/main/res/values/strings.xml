@@ -26,4 +26,5 @@
     <string name="due">Due</string>
     <string name="hide_completed">Hide Completed Items</string>
     <string name="show_completed">Include Completed Items</string>
+    <string name="menu_sort">Sort Items</string>
 </resources>
