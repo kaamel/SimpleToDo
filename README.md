@@ -48,13 +48,10 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a walkthrough of implemented user stories (The second video only shows the incremental features: sort menu option, option to delete
+                                                  the completed items via long press):
 
 <img src='http://i.imgur.com/DH3hnk3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-The following video only shows the incremental features: sort menu option, option to delete
-the completed items via long press
-
 <img src='http://i.imgur.com/LPRdZqh.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
